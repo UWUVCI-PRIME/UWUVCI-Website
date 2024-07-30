@@ -3,20 +3,15 @@ name: Copy folder to other branch
 on: [push]
 
 jobs:
-  copy:
-    name: Copy my folder
+  deploy:
+    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: copy
-        env:
-          SRC_FOLDER_PATH: 'dist'
-          TARGET_BRANCH: 'gh-pages'
-        run: |
-          files=$(find $SRC_FOLDER_PATH -type f) # get the file list
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git fetch                         # fetch branches
-          git checkout master       # checkout to your branch
-          git pull https://github.com/UWUVCI-PRIME/UWUVCI-Website.git master
-          git subtree push --prefix dist https://github.com/UWUVCI-PRIME/UWUVCI-Website.git gh-pages
+    - uses: actions/checkout@master
+    - name: Deploy
+      uses: s0/git-publish-subdir-action@develop
+      env:
+        REPO: self
+        BRANCH: gh-pages
+        FOLDER: dist
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
