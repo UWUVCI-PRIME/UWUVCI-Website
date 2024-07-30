@@ -18,4 +18,5 @@ jobs:
           git config --global user.email 'action@github.com'
           git fetch                         # fetch branches
           git checkout master       # checkout to your branch
+          git pull https://github.com/UWUVCI-PRIME/UWUVCI-Website.git master
           git subtree push --prefix dist https://github.com/UWUVCI-PRIME/UWUVCI-Website.git gh-pages
