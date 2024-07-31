@@ -9,15 +9,18 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Use Node.js
+      if: ${{ github.ref == 'refs/heads/master' }}
       uses: actions/setup-node@main
       with:
         node-version: 20.x
     - name: npm install and build
+      if: ${{ github.ref == 'refs/heads/master' }}
       run: |
         npm install
         npm run build
     - name: Deploy
       uses: s0/git-publish-subdir-action@develop
+      if: ${{ github.ref == 'refs/heads/master' }}
       env:
         REPO: self
         BRANCH: gh-pages
