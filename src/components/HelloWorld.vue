@@ -100,7 +100,7 @@
 <script setup>
 
  function isMobile() {
-   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+   if(window.screen.availWidth <= 700) {
      return true
    } else {
      return false
