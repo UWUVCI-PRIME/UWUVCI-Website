@@ -100,7 +100,7 @@ export default {
             value: 'game_name',
           },
           { title: 'Game Region', sortable: false,value: 'game_region' },
-          { title: 'Base Name', sortable: false,value: 'base_name' },
+          { title: 'Base Game', sortable: false,value: 'base_name' },
           { title: 'Base Region', sortable: false,value: 'base_region' },
           { title: 'Status', sortable: false,value: 'status' },
           { title: 'Notes', sortable: false, value: 'notes' },
