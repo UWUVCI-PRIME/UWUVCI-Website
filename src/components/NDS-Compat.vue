@@ -74,9 +74,12 @@
          label
        ></v-chip>
      </template>
-     <template v-slot:item.notes="{item}">
-       <p v-if="item.notes != 'None' ">{{ item.notes }}</p>
-     </template>
+     <template v-slot:item.notes="{ item }">
+      <p v-if="item.notes != 'None' ">
+        <span v-linkify="item.notes"></span>
+      </p>
+    </template>
+
    </v-data-table>
    
   
