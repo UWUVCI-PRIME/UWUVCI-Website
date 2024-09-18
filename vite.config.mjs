@@ -13,6 +13,14 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        ndscompat: 'ndscompat.html',
+      },
+    },
+  },
   base: "/UWUVCI-Website/",
   plugins: [
     VueRouter(),
