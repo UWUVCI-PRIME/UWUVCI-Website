@@ -1,7 +1,14 @@
 <template>
   <v-app>
+    
     <v-main>
+
+      <nav id="vue">
+        <div class="menu-item"><router-link to="/">Home</router-link></div>
+        <div class="menu-item"><router-link to="/ndscompat">NDS Compatibility</router-link></div>
+      </nav>
       <router-view />
+      
     </v-main>
     
     <v-footer height="40" app>
