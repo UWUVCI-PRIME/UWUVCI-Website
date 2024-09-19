@@ -2,21 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0;url=/UWUVCI-Website/">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Page Not Found</title>
 </head>
 <body>
-  <h1>Page Not Found</h1>
-  <p>Redirecting you back to the homepage...</p>
   <script>
-    // Get the full URL
-    const currentPath = window.location.pathname;
+    // Extract the current path
+    let currentPath = window.location.pathname;
 
-    // Make sure you're only adding the base path once
-    if (!currentPath.includes('/UWUVCI-Website/')) {
-      window.location.href = '/UWUVCI-Website/';
+    // Remove the base path (in this case /UWUVCI-Website) from the current path
+    const basePath = '/UWUVCI-Website';
+    if (currentPath.startsWith(basePath)) {
+      currentPath = currentPath.substring(basePath.length);
+    }
+
+    // Redirect to the correct path by appending to the base path
+    if (currentPath) {
+      window.location.replace(`${basePath}${currentPath}`);
     } else {
-      window.location.href = '/UWUVCI-Website/#' + currentPath;
+      // If no valid path, redirect to the home page
+      window.location.replace(basePath);
     }
   </script>
 </body>
