@@ -100,11 +100,11 @@ import { ref, onMounted } from 'vue';
 const search = ref('');  // Bound to the search field
 const compatibility = ref({});  // Holds compatibility data
 const headers = ref([
-  { title: 'Game Name', align: 'start', sortable: false, value: 'game_name' },
-  { title: 'Game Region', sortable: false, value: 'game_region' },
-  { title: 'Base Game', sortable: false, value: 'base_name' },
-  { title: 'Base Region', sortable: false, value: 'base_region' },
-  { title: 'Status', sortable: false, value: 'status' },
+  { title: 'Game Name', align: 'start', sortable: true, value: 'game_name' },
+  { title: 'Game Region', sortable: true, value: 'game_region' },
+  { title: 'Base Game', sortable: true, value: 'base_name' },
+  { title: 'Base Region', sortable: true, value: 'base_region' },
+  { title: 'Status', sortable: true, value: 'status' },
   { title: 'Notes', sortable: false, value: 'notes' },
 ]);
 
