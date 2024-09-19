@@ -1,55 +1,39 @@
 <template>
+  
+
   <v-app>
+
     <v-main>
-      <v-container class="fill-height">
-        <v-responsive class="align-center fill-height mx-auto" max-width="xs:370 700">
-          <!-- UWUVCI Logo -->
-          <v-img
-            class="mb-4"
-            height="150"
-            src="@/assets/UWUVCI_LOGO.png"
-            alt="UWUVCI Logo"
-          />
+      <div>
+        <v-toolbar app dark style="background-color: rgb(35 35 35);" class="hidden-xs-and-down">
+          <v-toolbar-title>UWUVCI</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-menu>
+              <template v-slot:activator="{ props }">
+                <v-btn color="primary" v-bind="props">
+                  Compatibility ▾
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item>
+                  <v-btn lock style="background-color: transparent; width: 100%; text-align: left" to="/ndscompat" title="">
+                    NDS
+                  </v-btn>
+                </v-list-item>
+              </v-list>
+            </v-menu>  
+            <v-btn lock color="primary" to="/" title="">
+              Home
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+      </div>
 
-          <!-- Welcome message -->
-          <div class="text-center">
-            <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
-            <h1 class="text-h2 font-weight-bold">UWUVCI</h1>
-          </div>
+      <router-view></router-view>
 
-          <!-- Closing this tag, is this really needed though? -->
-          <div class="py-4"></div>
-
-          <!-- Added example of linking somewhere -->
-          <v-row justify="center">
-            <v-col cols="12" md="2">
-              <router-link to="/ndscompat">
-                <v-btn block color="primary">NDS Compatibility</v-btn>
-              </router-link>
-            </v-col>
-          </v-row>
-
-          <!-- Closing this tag, is this really needed though? -->
-          <div class="py-4"></div>
-
-          <!-- Notification card -->
-          <v-row>
-            <v-col cols="12">
-              <v-card class="py-4" color="surface-variant" rounded="lg" variant="outlined">
-                <v-card-text class="xs:text-sm-body-2 text-h5 font-weight-bold" style="text-align:center">
-                  The UWUVCI Webpage will be available soon. <br />
-                  The Table below is for testing.
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-
-          <!-- Content specific to each page will be injected here -->
-          <router-view />
-        </v-responsive>
-      </v-container>
     </v-main>
-
+    
     <v-footer height="40" app>
       <a
         v-for="item in items"
