@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=/UWUVCI-Website/">
-    <script type="text/javascript">
-      // Redirect all 404s to the correct route by rewriting the path
-      // Fuck off static routing
-      var pathname = window.location.pathname;
-      var newUrl = "/UWUVCI-Website" + pathname;
-      window.location.replace(newUrl);
-    </script>
-  </head>
-  <body>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found</title>
+</head>
+<body>
+  <h1>Page Not Found</h1>
+  <p>Redirecting you back to the homepage...</p>
+  <script>
+    // Get the full URL
+    const currentPath = window.location.pathname;
+
+    // Make sure you're only adding the base path once
+    if (!currentPath.includes('/UWUVCI-Website/')) {
+      window.location.href = '/UWUVCI-Website/';
+    } else {
+      window.location.href = '/UWUVCI-Website/#' + currentPath;
+    }
+  </script>
+</body>
 </html>
