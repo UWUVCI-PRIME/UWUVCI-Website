@@ -5,19 +5,17 @@
  */
 
 // Plugins
-import { registerPlugins } from '@/plugins'
-
-
+import { registerPlugins } from '@/plugins';
 
 // Components
-import App from './App.vue'
+import App from './App.vue';
 
 // Composables
-import { createApp } from 'vue'
-import router from './router'
+import { createApp } from 'vue';
 
-const app = createApp(App, router)
+// Assets
+import "./assets/styles.css";
 
-registerPlugins(app)
-
-app.mount('#app')
+const app = createApp(App);
+registerPlugins(app);       // Register plugins like Vuetify, etc.
+app.mount('#app');          // Mount the app to a single entry point
