@@ -12,7 +12,6 @@ import App from './App.vue';
 
 // Composables
 import { createApp } from 'vue';
-import router from './router';
 
 // Assets
 import "./assets/styles.css";
