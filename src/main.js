@@ -19,5 +19,4 @@ import "./assets/styles.css";
 
 const app = createApp(App);
 registerPlugins(app);       // Register plugins like Vuetify, etc.
-app.use(router);            // Use Vue Router for navigation
 app.mount('#app');          // Mount the app to a single entry point
