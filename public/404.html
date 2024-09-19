@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=/UWUVCI-Website/">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Page Not Found</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // Extract the pathname from the current URL (like /ndscompat)
+    var pathname = window.location.pathname;
+    
+    // Remove the leading slash from the path
+    pathname = pathname.replace(/^\//, '');
+
+    // Redirect to the Vue app, preserving the path (add it after the hash)
+    window.location.replace("/UWUVCI-Website/#/" + pathname);
+  </script>
+</body>
+</html>

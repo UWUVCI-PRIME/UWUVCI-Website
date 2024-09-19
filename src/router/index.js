@@ -1,5 +1,5 @@
 // Import Vue Router and views
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/Home.vue';
 import NDSCompat from '@/views/NDSCompat.vue';
 
@@ -7,11 +7,12 @@ import NDSCompat from '@/views/NDSCompat.vue';
 const routes = [
   { path: '/', name: 'Home', component: Home },
   { path: '/ndscompat', name: 'NDSCompat', component: NDSCompat },
+  { path: '/:pathMatch(.*)*', redirect: '/' }, // Handle unmatched routes
 ];
 
 // Create a new Vue Router instance with manual routing
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),  // This is how Vue Router manages history (URLs)
+  history: createWebHashHistory(),  // Use hash mode for GitHub Pages
   routes,  // The routes defined above
 });
 
