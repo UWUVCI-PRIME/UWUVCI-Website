@@ -10,7 +10,7 @@
   <script>
     const currentURL = window.location.href;
     const basePath = '/UWUVCI-Website/';
-    
+  
     // Check if the URL starts with the base path and if we are not on the homepage
     if (currentURL.includes(basePath) && window.location.pathname !== basePath) {
       // Extract the relative path (e.g., "ndscompat")
@@ -18,19 +18,22 @@
   
       // Push user to the homepage and store the relative path
       sessionStorage.setItem('redirectPath', relativePath);
-      window.location.replace(window.location.origin + basePath);
+      window.location.replace(window.location.origin + basePath);  // Redirect to homepage
     } else if (window.location.pathname === basePath && sessionStorage.getItem('redirectPath')) {
-      // If we're on the homepage and there's a stored path, redirect to that path
+      // Once on the homepage, retrieve the stored path
       const redirectPath = sessionStorage.getItem('redirectPath');
       sessionStorage.removeItem('redirectPath');
       
-      // Use Vue Router to navigate to the correct path after homepage is loaded
-      window.location.replace(window.location.origin + basePath + redirectPath);
+      // Programmatically navigate to the correct route using Vue Router
+      const router = window.app?.$router;
+      if (router) {
+        router.push(`/${redirectPath}`);
+      }
     } else {
-      // If there's no path to redirect to, display a 404 error
+      // If no path to redirect, display a 404 error
       document.body.innerHTML = '<h1>Page Not Found</h1><p>The page you are looking for does not exist.</p>';
     }
-  </script>
+  </script>  
   
 </body>
 </html>
