@@ -7,24 +7,15 @@
   <title>Page Not Found</title>
 </head>
 <body>
-  <script>
-    // Get the current URL
-    const currentURL = window.location.href;
-    const basePath = '/UWUVCI-Website/';
-  
-    // If we're not on the homepage
-    if (!currentURL.endsWith(basePath)) {
-      // Save the relative path
-      const relativePath = window.location.pathname.replace(basePath, '');
-  
-      // Store the path in sessionStorage
-      sessionStorage.setItem('redirectPath', relativePath);
-  
-      // Redirect to the homepage
-      window.location.replace(window.location.origin + basePath);
-    }
+  <script type="text/javascript">
+    // Extract the pathname from the current URL (like /ndscompat)
+    var pathname = window.location.pathname;
+    
+    // Remove the leading slash from the path
+    pathname = pathname.replace(/^\//, '');
+
+    // Redirect to the Vue app, preserving the path (add it after the hash)
+    window.location.replace("/UWUVCI-Website/#/" + pathname);
   </script>
-  
-  
 </body>
 </html>
