@@ -85,16 +85,19 @@
             </tr>
           </template>
         </v-data-table>
+
       </div>
     </v-responsive>
   </v-container>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router'; // To access route information
 import { fetchCompatibilityData, fixCompatibilityData } from '@/services/compatibilityService';
+import { ref, onMounted, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
+const route = useRoute();
+const router = useRouter();
 const search = ref('');
 const compatibility = ref({});
 const headers = ref([
@@ -106,18 +109,44 @@ const headers = ref([
   { title: 'Notes', sortable: false, value: 'notes' },
 ]);
 
-const route = useRoute(); // Access the current route
-const title = ref(route.name); // Dynamically set the title using the route name
+// Function to capitalize the first letter of the console name (e.g., ndscompat -> NDS)
+function formatTitleFromRoute(routeName) {
+  return routeName.charAt(0).toUpperCase() + routeName.slice(1, 3).toUpperCase(); // For "ndscompat" => "NDS"
+}
 
-// Fetch and process compatibility data on mount
-onMounted(async () => {
-  const jsonFile = `${title.value}Compat.json`; // Generate JSON file dynamically
-  const data = await fetchCompatibilityData(jsonFile);
-  if (data) {
-    compatibility.value = data;
-    fixCompatibilityData(compatibility.value);
+const title = ref('');
+const jsonFileName = ref('');
+
+// Function to fetch the compatibility data
+async function loadCompatibilityData() {
+  try {
+    const data = await fetchCompatibilityData(jsonFileName.value);  // Fetch JSON data dynamically
+    if (data) {
+      compatibility.value = data;
+      fixCompatibilityData(compatibility.value);
+    }
+  } catch (error) {
+    console.error("Error fetching compatibility data:", error);
   }
+}
+
+// Initialize title and jsonFileName, and then fetch the data
+function initializePageData() {
+  const routeCompat = route.params.consolecompat; // Get consolecompat from route
+  title.value = formatTitleFromRoute(routeCompat);
+  jsonFileName.value = `${title.value}Compat.json`;  // Construct the JSON filename
+  loadCompatibilityData();  // Fetch compatibility data
+}
+
+// Fetch data on component mount after initializing page data
+onMounted(() => {
+  initializePageData();  // Run initialization on mount
 });
 
-title.value = title.value.split('C')[0];  
+// Watch for route changes and update the title and json file name dynamically
+watch(() => route.params.consolecompat, () => {
+  title.value = formatTitleFromRoute(route.params.consolecompat);  // Update title for the new route
+  jsonFileName.value = `${title.value}Compat.json`;  // Update JSON filename
+  loadCompatibilityData();  // Fetch compatibility data for the new route
+});
 </script>
