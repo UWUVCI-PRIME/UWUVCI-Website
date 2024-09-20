@@ -118,4 +118,6 @@ onMounted(async () => {
     fixCompatibilityData(compatibility.value);
   }
 });
+
+title.value = title.value.split('C')[0];  
 </script>
