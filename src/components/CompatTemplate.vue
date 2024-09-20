@@ -2,13 +2,12 @@
   <v-container class="fill-height">
     <v-responsive class="align-center fill-height mx-auto" max-width="xs:370 700">
       <div>
-
         <!-- Title Card -->
         <v-row>
           <v-col cols="12">
             <v-card class="py-4" color="surface-variant" rounded="lg" variant="outlined">
               <v-card-text class="xs:text-sm-body-2 text-h5 font-weight-bold" style="text-align:center">
-                UWUVCI NDS Compatibility List
+                UWUVCI {{ title }} Compatibility List
               </v-card-text>
 
               <v-overlay
@@ -86,19 +85,18 @@
             </tr>
           </template>
         </v-data-table>
-
       </div>
     </v-responsive>
   </v-container>
 </template>
 
 <script setup>
-// Import the global compatibility service
-import { fetchCompatibilityData, fixCompatibilityData } from '@/services/compatibilityService';
 import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router'; // To access route information
+import { fetchCompatibilityData, fixCompatibilityData } from '@/services/compatibilityService';
 
-const search = ref('');  // Bound to the search field
-const compatibility = ref({});  // Holds compatibility data
+const search = ref('');
+const compatibility = ref({});
 const headers = ref([
   { title: 'Game Name', align: 'start', sortable: true, value: 'game_name' },
   { title: 'Game Region', sortable: true, value: 'game_region' },
@@ -108,12 +106,16 @@ const headers = ref([
   { title: 'Notes', sortable: false, value: 'notes' },
 ]);
 
-// Fetch and process compatibility data when the component is mounted
+const route = useRoute(); // Access the current route
+const title = ref(route.name); // Dynamically set the title using the route name
+
+// Fetch and process compatibility data on mount
 onMounted(async () => {
-  const data = await fetchCompatibilityData();  // Fetch JSON data dynamically
+  const jsonFile = `${title.value}Compat.json`; // Generate JSON file dynamically
+  const data = await fetchCompatibilityData(jsonFile);
   if (data) {
-    compatibility.value = data;  // Assign fetched data to compatibility ref
-    fixCompatibilityData(compatibility.value);  // Process and fix data
+    compatibility.value = data;
+    fixCompatibilityData(compatibility.value);
   }
 });
 </script>
