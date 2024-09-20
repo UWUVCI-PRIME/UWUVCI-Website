@@ -6,53 +6,12 @@ import CompatTemplate from '@/components/CompatTemplate.vue';
 // Define routes manually (couldn't get dynamic working)
 const routes = [
   { path: '/', name: 'Home', component: Home },
+
+  // Use :consolecompat as a dynamic param to handle all compatibility pages
   {
-    path: '/ndscompat',
-    name: 'NDSCompat',
+    path: '/:consolecompat',
+    name: 'Compat',
     component: CompatTemplate,
-    props: { jsonFileName: 'NDSCompat.json', title: 'NDS' },
-  },
-  {
-    path: '/n64compat',
-    name: 'N64Compat',
-    component: CompatTemplate,
-    props: { jsonFileName: 'N64Compat.json', title: 'N64' },
-  },
-  {
-    path: '/gbacompat',
-    name: 'GBACompat',
-    component: CompatTemplate,
-    props: { jsonFileName: 'GBACompat.json', title: 'GBA' },
-  },
-  {
-    path: '/msxcompat',
-    name: 'MSXCompat',
-    component: CompatTemplate,
-    props: { jsonFileName: 'MSXCompat.json', title: 'MSX' },
-  },
-  {
-    path: '/nescompat',
-    name: 'NESCompat',
-    component: CompatTemplate,
-    props: { jsonFileName: 'NESCompat.json', title: 'NES' },
-  },
-  {
-    path: '/snescompat',
-    name: 'SNESCompat',
-    component: CompatTemplate,
-    props: { jsonFileName: 'SNESCompat.json', title: 'SNES' },
-  },
-  {
-    path: '/tg16compat',
-    name: 'TG16Compat',
-    component: CompatTemplate,
-    props: { jsonFileName: 'TG16Compat.json', title: 'TG16' },
-  },
-  {
-    path: '/wiicompat',
-    name: 'WiiCompat',
-    component: CompatTemplate,
-    props: { jsonFileName: 'WiiCompat.json', title: 'Wii' },
   },
   {
     path: '/:pathMatch(.*)*', // Handle unmatched paths
