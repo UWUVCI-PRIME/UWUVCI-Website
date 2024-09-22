@@ -2,13 +2,12 @@
   <v-container class="fill-height">
     <v-responsive class="align-center fill-height mx-auto" max-width="xs:370 700">
       <div>
-
         <!-- Title Card -->
         <v-row>
           <v-col cols="12">
             <v-card class="py-4" color="surface-variant" rounded="lg" variant="outlined">
               <v-card-text class="xs:text-sm-body-2 text-h5 font-weight-bold" style="text-align:center">
-                UWUVCI NDS Compatibility List
+                UWUVCI {{ title }} Compatibility List
               </v-card-text>
 
               <v-overlay
@@ -93,12 +92,14 @@
 </template>
 
 <script setup>
-// Import the global compatibility service
 import { fetchCompatibilityData, fixCompatibilityData } from '@/services/compatibilityService';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-const search = ref('');  // Bound to the search field
-const compatibility = ref({});  // Holds compatibility data
+const route = useRoute();
+const router = useRouter();
+const search = ref('');
+const compatibility = ref({});
 const headers = ref([
   { title: 'Game Name', align: 'start', sortable: true, value: 'game_name' },
   { title: 'Game Region', sortable: true, value: 'game_region' },
@@ -108,12 +109,44 @@ const headers = ref([
   { title: 'Notes', sortable: false, value: 'notes' },
 ]);
 
-// Fetch and process compatibility data when the component is mounted
-onMounted(async () => {
-  const data = await fetchCompatibilityData();  // Fetch JSON data dynamically
-  if (data) {
-    compatibility.value = data;  // Assign fetched data to compatibility ref
-    fixCompatibilityData(compatibility.value);  // Process and fix data
+// Function to capitalize the first letter of the console name (e.g., ndscompat -> NDS)
+function formatTitleFromRoute(routeName) {
+  return routeName.charAt(0).toUpperCase() + routeName.slice(1, 3).toUpperCase(); // For "ndscompat" => "NDS"
+}
+
+const title = ref('');
+const jsonFileName = ref('');
+
+// Function to fetch the compatibility data
+async function loadCompatibilityData() {
+  try {
+    const data = await fetchCompatibilityData(jsonFileName.value);  // Fetch JSON data dynamically
+    if (data) {
+      compatibility.value = data;
+      fixCompatibilityData(compatibility.value);
+    }
+  } catch (error) {
+    console.error("Error fetching compatibility data:", error);
   }
+}
+
+// Initialize title and jsonFileName, and then fetch the data
+function initializePageData() {
+  const routeCompat = route.params.consolecompat; // Get consolecompat from route
+  title.value = formatTitleFromRoute(routeCompat);
+  jsonFileName.value = `${title.value}Compat.json`;  // Construct the JSON filename
+  loadCompatibilityData();  // Fetch compatibility data
+}
+
+// Fetch data on component mount after initializing page data
+onMounted(() => {
+  initializePageData();  // Run initialization on mount
+});
+
+// Watch for route changes and update the title and json file name dynamically
+watch(() => route.params.consolecompat, () => {
+  title.value = formatTitleFromRoute(route.params.consolecompat);  // Update title for the new route
+  jsonFileName.value = `${title.value}Compat.json`;  // Update JSON filename
+  loadCompatibilityData();  // Fetch compatibility data for the new route
 });
 </script>

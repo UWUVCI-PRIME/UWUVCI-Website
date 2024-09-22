@@ -1,11 +1,6 @@
-import { useRoute } from 'vue-router';
-
 // Function to fetch the JSON file dynamically based on the current route
-export async function fetchCompatibilityData() {
-  const route = useRoute();  // Get the current route
-  const routeName = route.name || 'default';  // Use route name, fallback to 'default'
-
-  const jsonUrl = `https://raw.githubusercontent.com/UWUVCI-PRIME/UWUVCI-Compatibility/main/${routeName}.json`;
+export async function fetchCompatibilityData(jsonFileName) {
+  const jsonUrl = `https://raw.githubusercontent.com/UWUVCI-PRIME/UWUVCI-Compatibility/main/${jsonFileName}`;
 
   try {
     // Fetch the JSON data

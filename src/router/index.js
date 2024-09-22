@@ -1,13 +1,22 @@
 // Import Vue Router and views
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/Home.vue';
-import NDSCompat from '@/views/NDSCompat.vue';
+import CompatTemplate from '@/components/CompatTemplate.vue';
 
 // Define routes manually (couldn't get dynamic working)
 const routes = [
   { path: '/', name: 'Home', component: Home },
-  { path: '/ndscompat', name: 'NDSCompat', component: NDSCompat },
-  { path: '/:pathMatch(.*)*', redirect: '/' }, // Handle unmatched routes
+
+  // Use :consolecompat as a dynamic param to handle all compatibility pages
+  {
+    path: '/:consolecompat',
+    name: 'Compat',
+    component: CompatTemplate,
+  },
+  {
+    path: '/:pathMatch(.*)*', // Handle unmatched paths
+    redirect: '/', // Redirect to the home page
+  },
 ];
 
 // Create a new Vue Router instance with manual routing
