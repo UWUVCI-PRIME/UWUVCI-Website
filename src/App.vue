@@ -26,6 +26,11 @@
                     N64
                   </v-btn>
                 </v-list-item>
+                <v-list-item>
+                  <v-btn style="background-color: transparent; width: 100%; text-align: left" to="/nescompat" title="">
+                    NES
+                  </v-btn>
+                </v-list-item>
               </v-list>
             </v-menu>
             <v-btn color="primary" to="/" title="">
