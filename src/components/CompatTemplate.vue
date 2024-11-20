@@ -99,6 +99,7 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 const search = ref('');
+const wii = ref(false);
 const compatibility = ref({});
 const headers = ref([
   { title: 'Game Name', align: 'start', sortable: true, value: 'game_name' },
@@ -135,15 +136,17 @@ function initializePageData() {
   const routeCompat = route.params.consolecompat; // Get consolecompat from route
   title.value = formatTitleFromRoute(routeCompat);
   if( title.value.toLowerCase().includes("wii") ){
-  headers = ref([
-  { title: 'Game Name', align: 'start', sortable: true, value: 'game_name' },
-  { title: 'Game Region', sortable: true, value: 'game_region' },
-  { title: 'Base Game', sortable: true, value: 'base_name' },
-  { title: 'Base Region', sortable: true, value: 'base_region' },
-  { title: 'Status', sortable: true, value: 'status' },
-  { title: 'Gamepad Support', sortable: true, value: 'gamepad' },
-  { title: 'Notes', sortable: false, value: 'notes' },
-]);
+    headers = ref([
+      { title: 'Game Name', align: 'start', sortable: true, value: 'game_name' },
+      { title: 'Game Region', sortable: true, value: 'game_region' },
+      { title: 'Base Game', sortable: true, value: 'base_name' },
+      { title: 'Base Region', sortable: true, value: 'base_region' },
+      { title: 'Status', sortable: true, value: 'status' },
+      { title: 'Gamepad Support', sortable: true, value: 'gamepad' },
+      { title: 'Notes', sortable: false, value: 'notes' },
+    ]);
+    wii = ref(true);
+    console.log("In Wii");
   }
   jsonFileName.value = `${title.value}Compat.json`;  // Construct the JSON filename
   loadCompatibilityData();  // Fetch compatibility data
