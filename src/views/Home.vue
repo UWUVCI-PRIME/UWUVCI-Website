@@ -34,10 +34,10 @@
           <!-- Notification card -->
           <v-row>
             <v-col cols="12">
-              <v-card class="py-4" color="surface-variant" rounded="lg" variant="outlined">
+              <v-card class="py-4" color="yellow" rounded="lg" variant="tonal">
                 <v-card-text class="xs:text-sm-body-2 text-h5 font-weight-bold" style="text-align:center">
-                  The UWUVCI Webpage will be available soon. <br />
-                  The Table below is for testing.
+                  🛈 This is an early Version of the UWUVCI Webpage!<br />
+                  The Compatibility Lists can be found on the Navigation Bar on the Top of this Website!
                 </v-card-text>
               </v-card>
             </v-col>

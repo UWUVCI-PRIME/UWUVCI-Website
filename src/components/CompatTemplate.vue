@@ -9,7 +9,7 @@
               <v-card-text class="xs:text-sm-body-2 text-h5 font-weight-bold" style="text-align:center">
                 UWUVCI {{ title }} Compatibility List
               </v-card-text>
-
+              
               <v-overlay
                 opacity=".12"
                 scrim="primary"
@@ -17,6 +17,17 @@
                 model-value
                 persistent
               ></v-overlay>
+            </v-card>
+          </v-col>
+        </v-row>
+
+        <!-- User Submitted Warning -->
+        <v-row>
+          <v-col cols="12">
+            <v-card class="py-1" color="yellow" rounded="lg" variant="tonal">
+              <v-card-text class="xs:text-sm-body-3 text-h5 font-weight-bold" style="text-align:center">
+                🛈 All Entries in this List are User-Submitted and might not be 100% Correct. 
+              </v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -164,6 +175,7 @@ async function loadCompatibilityData() {
 function initializePageData() {
   const routeCompat = route.params.consolecompat; // Get consolecompat from route
   title.value = formatTitleFromRoute(routeCompat);
+  
   if( title.value.toLowerCase().includes("wii") ){
     headers.value = [
       { title: 'Game Name', align: 'start', sortable: true, value: 'game_name' },
@@ -178,6 +190,11 @@ function initializePageData() {
   }
   jsonFileName.value = `${title.value}Compat.json`;  // Construct the JSON filename
   loadCompatibilityData();  // Fetch compatibility data
+  if(title.value.toLowerCase().includes("tg")){
+    title.value = "TG16";
+  }else if(title.value.toLowerCase().includes("sne")){
+    title.value = "SNES";
+  }
 }
 
 // Fetch data on component mount after initializing page data
