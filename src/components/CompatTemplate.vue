@@ -77,6 +77,35 @@
                   Broken
                 </v-chip>
               </td>
+              <td v-if="wii == true">
+                <v-chip
+                  v-if="item.gamepad == 2"
+                  color="green"
+                  class="text-uppercase"
+                  size="small"
+                  label
+                >
+                  Supported
+                </v-chip>
+                <v-chip
+                  v-else-if="item.gamepad == 1"
+                  color="yellow"
+                  class="text-uppercase"
+                  size="small"
+                  label
+                >
+                  Issues
+                </v-chip>
+                <v-chip
+                  v-else
+                  color="red"
+                  class="text-uppercase"
+                  size="small"
+                  label
+                >
+                  Unsupported
+                </v-chip>
+              </td>
               <td>
                 <p v-if="item.notes != 'None'">
                   <span v-linkify="item.notes"></span>
@@ -99,8 +128,9 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 const search = ref('');
+const wii = ref(false);
 const compatibility = ref({});
-const headers = ref([
+ const headers = ref([
   { title: 'Game Name', align: 'start', sortable: true, value: 'game_name' },
   { title: 'Game Region', sortable: true, value: 'game_region' },
   { title: 'Base Game', sortable: true, value: 'base_name' },
@@ -134,6 +164,18 @@ async function loadCompatibilityData() {
 function initializePageData() {
   const routeCompat = route.params.consolecompat; // Get consolecompat from route
   title.value = formatTitleFromRoute(routeCompat);
+  if( title.value.toLowerCase().includes("wii") ){
+    headers.value = [
+      { title: 'Game Name', align: 'start', sortable: true, value: 'game_name' },
+      { title: 'Game Region', sortable: true, value: 'game_region' },
+      { title: 'Base Game', sortable: true, value: 'base_name' },
+      { title: 'Base Region', sortable: true, value: 'base_region' },
+      { title: 'Status', sortable: true, value: 'status' },
+      { title: 'Gamepad Support', sortable: true, value: 'gamepad' },
+      { title: 'Notes', sortable: false, value: 'notes' },
+    ];
+    wii.value = true;
+  }
   jsonFileName.value = `${title.value}Compat.json`;  // Construct the JSON filename
   loadCompatibilityData();  // Fetch compatibility data
 }

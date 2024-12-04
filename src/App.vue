@@ -22,8 +22,38 @@
                   </v-btn>
                 </v-list-item>
                 <v-list-item>
+                  <v-btn style="background-color: transparent; width: 100%; text-align: left" to="/gbacompat" title="">
+                    GBA
+                  </v-btn>
+                </v-list-item>
+                <v-list-item>
                   <v-btn style="background-color: transparent; width: 100%; text-align: left" to="/n64compat" title="">
                     N64
+                  </v-btn>
+                </v-list-item>
+                <v-list-item>
+                  <v-btn style="background-color: transparent; width: 100%; text-align: left" to="/snescompat" title="">
+                    SNES
+                  </v-btn>
+                </v-list-item>
+                <v-list-item>
+                  <v-btn style="background-color: transparent; width: 100%; text-align: left" to="/nescompat" title="">
+                    NES
+                  </v-btn>
+                </v-list-item>
+                 <v-list-item>
+                  <v-btn style="background-color: transparent; width: 100%; text-align: left" to="/tg16compat" title="">
+                    TG16
+                  </v-btn>
+                </v-list-item>
+                <v-list-item>
+                  <v-btn style="background-color: transparent; width: 100%; text-align: left" to="/msxcompat" title="">
+                    MSX
+                  </v-btn>
+                </v-list-item>
+                 <v-list-item>
+                  <v-btn style="background-color: transparent; width: 100%; text-align: left" to="/wiicompat" title="">
+                    Wii
                   </v-btn>
                 </v-list-item>
               </v-list>
