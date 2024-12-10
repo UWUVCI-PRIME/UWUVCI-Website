@@ -20,7 +20,7 @@ export default defineConfig({
       },
     },
   },
-  base: "/UWUVCI-Website/",
+  base: "",
   plugins: [
     VueRouter(),
     Layouts(),
