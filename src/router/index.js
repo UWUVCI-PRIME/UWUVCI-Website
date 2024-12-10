@@ -1,5 +1,5 @@
 // Import Vue Router and views
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/views/Home.vue';
 import CompatTemplate from '@/components/CompatTemplate.vue';
 
@@ -21,7 +21,7 @@ const routes = [
 
 // Create a new Vue Router instance with manual routing
 const router = createRouter({
-  history: createWebHashHistory(),  // Use hash mode for GitHub Pages
+  history: createWebHistory(),  // Use hash mode for GitHub Pages
   routes,  // The routes defined above
 });
 
